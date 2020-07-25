@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>STATEWISE DATA</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+  
+</head>
+<body onload="fetch()">
+  <div class="container ml-auto">
+
+
+    <form class="form-inline my-2 my-lg-0" method="get"
+        action="/searchstate">
+        <input class="form-control mr-sm-2" type="search"
+            placeholder="state" aria-label="Search" name="query2"
+            id="search2">
+        <button class="btn btn-outline-success my-2 my-sm-0"
+            type="submit">Search</button>
+    </form>
+
+
+
+</div>
+   <div class="container-fluid">
+<h3>How It Spreads: </h3>
+        <img class ="img-fluid" src="https://www.mygov.in/sites/all/themes/mygov/images/covid/block-one.png" alt="">
+    
+        
+        <h3>Precautions:</h3>
+        <img class ="img-fluid" src="https://www.mygov.in/sites/all/themes/mygov/images/covid/block-two.png" alt="">
+ 
+ 
+         <!-- START THE FEATURETTES -->
+ 
+        </div>
+ 
+         <!-- /END THE FEATURETTES -->
+         <div class="container mt-5">
+ 
+         <img class ="img-fluid" src="https://www.mygov.in/sites/all/themes/mygov/images/covid/symptoms.png" alt="">
+        </div>
+
+
+    <div class="table-responsive">
+      <p class="font-weight-bold"><h3>Statewise Data: </h3></p>
+        <table class='table table-bordered table-striped text-centre' id="tabval2">
+
+            <tr>
+        
+                <th>State</th>
+                <th>TotalConfirmed</th>
+                <th>Active</th>
+                <th>Recovered</th>
+                <th>TotalDeaths</th>
+                
+                <th>lastupdatedtime</th>
+                
+
+
+
+            </tr>
+            
+        </table>
+    </div>
+
+
+
+
+
+
+</body>    
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+    function fetch(){
+        $.get("https://api.covid19india.org/data.json",
+        function (data){
+            console.log(data['statewise'].length);
+           var tbval2 = document.getElementById('tabval2');
+           console.log(tbval2)
+              for(var i=1; i<(data['statewise'].length); i++){
+
+                var y =tbval2.insertRow();
+                y.insertCell(0);
+                tbval2.rows[i].cells[0].innerHTML = data['statewise'][i-1][
+                   'state'];
+                   tbval2.rows[i].cells[0].style.background = '#7a4a91';
+                   tbval2.rows[i].cells[0].style.color = '#fff';
+
+                   y.insertCell(1);
+                tbval2.rows[i].cells[1].innerHTML = data['statewise'][i-1][
+                   'confirmed'];
+                tbval2.rows[i].cells[1].style.background = '#4bb7d8';
+
+
+                y.insertCell(2);
+                tbval2.rows[i].cells[2].innerHTML = data['statewise'][i-1][
+                   'active'];
+                tbval2.rows[i].cells[2].style.background = '#4bb7d8';
+
+                y.insertCell(3);
+                tbval2.rows[i].cells[3].innerHTML = data['statewise'][i-1][
+                   'recovered'];
+                tbval2.rows[i].cells[3].style.background = '#9cc850';
+
+                y.insertCell(4);
+                tbval2.rows[i].cells[4].innerHTML = data['statewise'][i-1][
+                   'deaths'];
+                tbval2.rows[i].cells[4].style.background = '#4bb7d8';
+
+                
+                y.insertCell(5);
+                tbval2.rows[i].cells[5].innerHTML = data['statewise'][i-1][
+                   'lastupdatedtime'];
+                tbval2.rows[i].cells[5].style.background = '#f36e23';
+
+               
+           }
+
+
+
+
+        }
+        
+        )
+    }
+    
+    </script>
+</html>
+
+
+
+
+
+
+
